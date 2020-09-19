@@ -1,7 +1,8 @@
 from datetime import datetime
+from time import sleep
+from telegram import bot
 import requests
 import html2text
-from time import sleep
 import lxml.html
 
 
@@ -30,14 +31,14 @@ while True:
             url = session.get('https://vk.com/id472177450')
             text = html2text.HTML2Text().handle(url.text)
             if len(text[text.find('заходила'):text.find('назад')]) == 0:
-                print('Сейчас в сети')
+                print('Online')
                 hours = datetime.now().hour
                 minutes = datetime.now().minute
                 mass.append([hours, minutes])
                 sleep(15)
             else:
                 if len(mass) == 0:
-                    print('Не в сети')
+                    print('Offline')
                     sleep(15)
                     break
                 else:
@@ -51,8 +52,10 @@ while True:
                     sess = ((mass[-1][0] * 60 + mass[-1][1]) - (mass[0][0] * 60 + mass[0][1])) - int(''.join(x))
                     file = open('./DataBase/follower.txt','a', encoding='utf-8-sig')
                     print('Идёт запись...')
-                    file.write(f'\nБыла в сети с {mass[0][0]}:{mass[0][1]} по {mass[-1][0]}:{mass[-1][1]} ~~ {sess} минут(ы)')
+                    msg = 'Была в сети с {mass[0][0]}:{mass[0][1]} по {mass[-1][0]}:{mass[-1][1]} ~~ {sess} минут(ы)'
+                    file.write(f'\n{msg}')
                     file.close()
+                    bot.send_msg(msg)
                     print('Запись завершена')
                     mass.clear()
         except:
