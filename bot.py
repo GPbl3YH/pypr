@@ -1,4 +1,11 @@
+import requests
+import vk_api
 
+vk_session = vk_api.VkApi(token='220e8752ae358b036e11a34cc4ec04466e8e55d6c1aea922dfb0ba78759fef10f9ea2a39b9d512444c236')
+
+vk = vk_session.get_api()
+
+print(vk.users.get(user_ids=472177450, fields=['online'])[0]['online'])
 
 def get_status(id):
     status = requests.get(f'https://api.vk.com/method/users.get?user_ids={id}&fields=online&access_token=220e8752ae358b036e11a34cc4ec04466e8e55d6c1aea922dfb0ba78759fef10f9ea2a39b9d512444c236&v=5.124')
