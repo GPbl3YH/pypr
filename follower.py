@@ -12,7 +12,7 @@ def send_msg(message):
     token = '1226847744:AAGu5ZS5Xf3ye9CLQeMNzUC2ouAF43G2Z9g'
     bot = telebot.TeleBot(token)
     bot.send_message('394143446', message)
-heroku buildpacks:set heroku/ruby
+
 mass = []
 while True:
     while True:
@@ -40,5 +40,4 @@ while True:
                     mass.clear()
         except:
             print("Problem")
-
 
