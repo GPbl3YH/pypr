@@ -4,11 +4,11 @@ import vk_api
 from datetime import datetime
 from time import sleep
 
-vk_session = vk_api.VkApi(token='220e8752ae358b036e11a34cc4ec04466e8e55d6c1aea922dfb0ba78759fef10f9ea2a39b9d512444c236')
+vk_session = vk_api.VkApi(token='2883d3c3bf86b1cb1b7b8bbe04c8a7e85c9298b5375679ea9644d61f4a28afd882e0fef34b5ef10addcfe')
 vk = vk_session.get_api()
 
 def get_status(id):
-    return vk.users.get(user_ids=472177450, fields=['online'])[0]['online']
+    return vk.users.get(user_ids=id, fields=['online'])[0]['online']
 
 def send_msg(message):
     token = '1226847744:AAGu5ZS5Xf3ye9CLQeMNzUC2ouAF43G2Z9g'
