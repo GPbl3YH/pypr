@@ -20,6 +20,7 @@ mass = []
 while True:
     while True:
         status = get_status(472177450)
+        print(status)
         if status == 1:
             print('Online')
             hours = datetime.now().hour
