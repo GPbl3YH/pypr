@@ -1,12 +1,12 @@
 import telebot
 import requests
 import vk_api
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from time import sleep
 
-vk_session = vk_api.VkApi(token='2883d3c3bf86b1cb1b7b8bbe04c8a7e85c9298b5375679ea9644d61f4a28afd882e0fef34b5ef10addcfe')
+vk_session = vk_api.VkApi(token='4c3103fff79f4afbd3d6bc34ec884b4c8c9e6cccc4bcc2d7265f0d0601a2c301ce04b4efe03e99cef966b')
 vk = vk_session.get_api()
-
+offset = timezone(timedelta(hours=3))
 
 def get_status(id):
     return vk.users.get(user_ids=id, fields=['online'])[0]['online']
@@ -24,10 +24,9 @@ while True:
         try:
             status = get_status(472177450)
             if status == 1:
-
                 print('Online')
-                hours = datetime.now().hour+3
-                minutes = datetime.now().minute
+                hours = datetime.now(offset).hour
+                minutes = datetime.now(offset).minute
                 mass.append([hours, minutes])
                 sleep(30)
             else:
