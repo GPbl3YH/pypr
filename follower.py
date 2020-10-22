@@ -5,7 +5,7 @@ from datetime import datetime, timezone, timedelta
 from time import sleep
 
 vk_session = vk_api.VkApi(
-    token='4c3103fff79f4afbd3d6bc34ec884b4c8c9e6cccc4bcc2d7265f0d0601a2c301ce04b4efe03e99cef966b')
+    token='24d8283c15f2794252624bbd8c2a39ff6b8160d7c30bf56e80c27aeaea9f72c2f98e206c4846c4fc13d07')
 vk = vk_session.get_api()
 offset = timezone(timedelta(hours=3))
 
@@ -23,41 +23,44 @@ def send_msg(message):
 mass = []
 while True:
     while True:
-
-        status = get_status(472177450)
-        if status == 1:
-            print('Online')
-            hours = datetime.now(offset).hour
-            minutes = datetime.now(offset).minute
-            mass.append([hours, minutes])
-            sleep(30)
-        else:
-            if len(mass) == 0:
-                print('Offline')
+        try:
+            status = get_status(472177450)
+            if status == 1:
+                print('Online')
+                hours = datetime.now(offset).hour
+                minutes = datetime.now(offset).minute
+                mass.append([hours, minutes])
                 sleep(30)
             else:
-                if mass[-1][0] == 0 and mass[0][0] == 23:
-                    mass[-1][0] = 24
-                if mass[-1][0] == 0 and mass[0][0] == 22:
-                    mass[-1][0] = 24
-                if mass[-1][0] == 1 and mass[0][0] == 23:
-                    mass[-1][0] = 25
-                if mass[-1][0] == 1 and mass[0][0] == 22:
-                    mass[-1][0] = 25
-                if mass[-1][0] == 2 and mass[0][0] == 23:
-                    mass[-1][0] = 26
-                if mass[-1][0] == 2 and mass[0][0] == 22:
-                    mass[-1][0] = 26
+                if len(mass) == 0:
+                    print('Offline')
+                    sleep(30)
+                else:
+                    if mass[-1][0] == 0 and mass[0][0] == 23:
+                        mass[-1][0] = 24
+                    if mass[-1][0] == 0 and mass[0][0] == 22:
+                        mass[-1][0] = 24
+                    if mass[-1][0] == 1 and mass[0][0] == 23:
+                        mass[-1][0] = 25
+                    if mass[-1][0] == 1 and mass[0][0] == 22:
+                        mass[-1][0] = 25
+                    if mass[-1][0] == 2 and mass[0][0] == 23:
+                        mass[-1][0] = 26
+                    if mass[-1][0] == 2 and mass[0][0] == 22:
+                        mass[-1][0] = 26
 
-                sess = ((mass[-1][0] * 60 + mass[-1][1]) -
-                        (mass[0][0] * 60 + mass[0][1])) - 5
-                if sess < 0:
-                    sess = 0
-                msg = f'Вход - {mass[0][0]}:{mass[0][1]}\nВыход - {mass[-1][0]}:{mass[-1][1]}\nПродолжительность - {sess} минут(ы)'
-                send_msg(msg)
-                print(f'{datetime.now().date()} - Запись завершена')
-                mass.clear()
-                sleep(30)
-
+                    sess = ((mass[-1][0] * 60 + mass[-1][1]) -
+                            (mass[0][0] * 60 + mass[0][1])) - 5
+                    if sess < 0:
+                        sess = 0
+                    msg = f'Вход - {mass[0][0]}:{mass[0][1]}\nВыход - {mass[-1][0]}:{mass[-1][1]}\nПродолжительность - {sess} минут(ы)'
+                    send_msg(msg)
+                    print(f'{datetime.now().date()} - Запись завершена')
+                    mass.clear()
+                    sleep(30)
+        except:
+            print('Problem')
 # 287286283
 # 472177450
+
+f522e16c41bde7dedf
