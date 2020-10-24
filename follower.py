@@ -1,7 +1,6 @@
 import telebot
 import requests
 import vk_api
-import lxml.html
 from datetime import datetime, timezone, timedelta
 from time import sleep
 
