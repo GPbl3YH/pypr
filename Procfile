@@ -1,2 +1,2 @@
 worker: python follower.py
-worker_1: python bot.py
+worker: python bot.py
