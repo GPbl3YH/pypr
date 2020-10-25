@@ -11,9 +11,9 @@ vk = vk_session.get_api()
 
 @bot.message_handler(commands=['start']) #/start - Главное меню
 def handle_start(message):
-    user_markup = ReplyKeyboardMarkup(True, one_time_keyboard=True)
+    user_markup = ReplyKeyboardMarkup(True, one_time_keyboard=False)
     user_markup.row('/status')
-
+    bot.send_message(message.from_user.id, 'Successful',reply_markup=user_markup)
 
 @bot.message_handler(commands=['status']) #/start - Главное меню
 def handle_status(message):
