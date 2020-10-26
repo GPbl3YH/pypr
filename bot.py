@@ -1,6 +1,7 @@
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton
 import telebot
 import vk_api
+from time import sleep
 
 token = '1226847744:AAGu5ZS5Xf3ye9CLQeMNzUC2ouAF43G2Z9g'
 bot = telebot.TeleBot(token)
@@ -20,6 +21,13 @@ def handle_status(message):
     status = 'Online' if vk.users.get(user_ids=472177450, fields=['online'])[0]['online'] == 1 else 'Offline'
     bot.send_message(message.from_user.id, status, reply_markup=False)
 
+    
 
-bot.polling()
+while True:
+    try:
+        bot.polling()
+    except Exception as err:
+        print(err)
+        sleep(30)
+
 
