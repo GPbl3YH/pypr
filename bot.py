@@ -14,7 +14,7 @@ vk = vk_session.get_api()
 @bot.message_handler(commands=['start']) #/start - Главное меню
 def handle_start(message):
     user_markup = ReplyKeyboardMarkup(True, one_time_keyboard=False)
-    user_markup.row(['/status', '/disappear'])
+    user_markup.row('/status', '/disappear')
     bot.send_message(message.from_user.id, 'Successful',reply_markup=user_markup)
 
 @bot.message_handler(commands=['status']) 
@@ -25,6 +25,7 @@ def handle_status(message):
 @bot.message_handler(commands=['disappear']) 
 def handle_dis(message):
     requests.get('https://api.vk.com/method/account.setOffline?user_ids=165086485&access_token=529239d88d367cfdb39fa8527eda052d6286d4724bec5c5b90a64b7dd110245049ddf2084523085725784&v=5.124')
+    bot.send_message(message.from_user.id, 'Disappeared', reply_markup=False)
 
 
 while True:
